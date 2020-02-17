@@ -31,7 +31,7 @@ PATTERN
   source_code_dir          = "${path.module}/source"
   handler                  = "detect_unused_eips.lambda_handler"
   lambda_runtime           = "python3.7"
-  environment_variable_map = { SNS_TOPIC = "DetectUnusedEIPs" }
+  environment_variable_map = { SNS_TOPIC = module.detect_unused_eips.sns_topic_arn }
   custom_lambda_policy     = <<EOF
 {
   "Version": "2012-10-17",
