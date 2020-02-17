@@ -50,7 +50,7 @@ EOF
 
 
   queue_name    = "DetectUnusedEIPs"
-  delay_seconds = 3600
+  delay_seconds = 900
 
   target_id = "DetectUnusedEIPs"
 
