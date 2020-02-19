@@ -9,15 +9,14 @@ module "detect_unused_eips" {
     "AWS API Call via CloudTrail"
   ],
   "source": [
-    "aws.s3"
+    "aws.ec2"
   ],
   "detail": {
     "eventSource": [
-      "s3.amazonaws.com"
+      "ec2.amazonaws.com"
     ],
     "eventName": [
-      "CreateBucket",
-      "DeleteBucketEncryption"
+      "DisassociateAddress"
     ]
   }
 }
@@ -34,7 +33,7 @@ PATTERN
   "Statement": [
     {
       "Action": [
-        "ec2:DetectAddresses"
+        "ec2:DescribeAddresses"
       ],
       "Effect": "Allow",
       "Resource": "*"
