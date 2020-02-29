@@ -1,5 +1,5 @@
 module "detect_unused_eips" {
-  source           = "git@github.com:cloudmitigator/reflex.git//modules/cwe_lambda?ref=v0.0.1"
+  source           = "git@github.com:cloudmitigator/reflex.git//modules/cwe_lambda?ref=v0.2.0"
   rule_name        = "DetectUnusedEIPs"
   rule_description = "Rule to detect Unused Elastic IP Addresses"
 
@@ -26,7 +26,7 @@ PATTERN
   source_code_dir          = "${path.module}/source"
   handler                  = "detect_unused_eips.lambda_handler"
   lambda_runtime           = "python3.7"
-  environment_variable_map = { SNS_TOPIC = module.detect_unused_eips.sns_topic_arn }
+  environment_variable_map = { SNS_TOPIC = var.sns_topic_arn }
   custom_lambda_policy     = <<EOF
 {
   "Version": "2012-10-17",
@@ -49,6 +49,5 @@ EOF
 
   target_id = "DetectUnusedEIPs"
 
-  topic_name = "DetectUnusedEIPs"
-  email      = var.email
+  sns_topic_arn = var.sns_topic_arn
 }
