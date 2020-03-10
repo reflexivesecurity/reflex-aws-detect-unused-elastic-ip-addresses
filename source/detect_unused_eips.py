@@ -23,9 +23,6 @@ class UnusedEIPRule(AWSRule):
     def resource_compliant(self):
         return not self.any_detached_eips()
 
-    def remediate(self):
-        pass
-
     def any_detached_eips(self):
         """ Returns True if the bucket is encrypted, False otherwise """
         all_addresses = self.client.describe_addresses()['Addresses']
