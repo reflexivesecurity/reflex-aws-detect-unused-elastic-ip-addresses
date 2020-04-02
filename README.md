@@ -11,7 +11,7 @@ To use this rule either add it to your `reflex.yaml` configuration file:
 ```
 rules:
   aws:
-    - reflex-aws-detect-unused-elastic-ip-addresses:
+    - detect-unused-elastic-ip-addresses:
         version: latest
 ```
 
