@@ -1,5 +1,5 @@
 module "detect_unused_eips" {
-  source           = "git::https://github.com/cloudmitigator/reflex-engine.git//modules/cwe_lambda?ref=v0.3.0"
+  source           = "git::https://github.com/cloudmitigator/reflex-engine.git//modules/cwe_lambda?ref=v0.5.7"
   rule_name        = "DetectUnusedEIPs"
   rule_description = "Rule to detect Unused Elastic IP Addresses"
 
