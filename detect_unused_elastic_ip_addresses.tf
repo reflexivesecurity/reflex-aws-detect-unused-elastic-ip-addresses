@@ -49,6 +49,6 @@ EOF
 
   target_id = "DetectUnusedEIPs"
 
-  sns_topic_arn = var.sns_topic_arn
+  sns_topic_arn  = var.sns_topic_arn
   sqs_kms_key_id = var.reflex_kms_key_id
 }
