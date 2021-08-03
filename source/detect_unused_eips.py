@@ -4,7 +4,7 @@ import json
 import os
 
 import boto3
-from reflex_core import AWSRule
+from reflex_core import AWSRule, subscription_confirmation
 
 
 class UnusedEIPRule(AWSRule):
@@ -25,10 +25,10 @@ class UnusedEIPRule(AWSRule):
 
     def any_detached_eips(self):
         """ Returns True if the bucket is encrypted, False otherwise """
-        all_addresses = self.client.describe_addresses()['Addresses']
+        all_addresses = self.client.describe_addresses()["Addresses"]
         for address in all_addresses:
-            if 'AssociationId' not in address.keys():
-                self.unattached_eips.append(address['AllocationId'])
+            if "AssociationId" not in address.keys():
+                self.unattached_eips.append(address["AllocationId"])
         if self.unattached_eips:
             return True
         return False
@@ -41,5 +41,9 @@ class UnusedEIPRule(AWSRule):
 def lambda_handler(event, _):
     """ Handles the incoming event """
     print(event)
-    unused_eip_rule = UnusedEIPRule(json.loads(event["Records"][0]["body"]))
+    event_payload = json.loads(event["Records"][0]["body"])
+    if subscription_confirmation.is_subscription_confirmation(event_payload):
+        subscription_confirmation.confirm_subscription(event_payload)
+        return
+    unused_eip_rule = UnusedEIPRule(event_payload)
     unused_eip_rule.run_compliance_rule()
